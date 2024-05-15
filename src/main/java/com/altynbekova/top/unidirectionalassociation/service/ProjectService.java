@@ -1,6 +1,7 @@
 package com.altynbekova.top.unidirectionalassociation.service;
 
 import com.altynbekova.top.unidirectionalassociation.dao.ProjectRepository;
+import com.altynbekova.top.unidirectionalassociation.entity.Person;
 import com.altynbekova.top.unidirectionalassociation.entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,10 @@ public class ProjectService {
     @Transactional
     public Project save(Project project){
         return projectRepository.save(project);
+    }
+
+    @Transactional
+    public void delete(long id) {
+        projectRepository.deleteById(id);
     }
 }

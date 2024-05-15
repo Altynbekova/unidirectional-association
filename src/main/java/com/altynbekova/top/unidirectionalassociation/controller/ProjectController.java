@@ -3,9 +3,8 @@ package com.altynbekova.top.unidirectionalassociation.controller;
 import com.altynbekova.top.unidirectionalassociation.entity.Project;
 import com.altynbekova.top.unidirectionalassociation.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,8 +13,20 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @GetMapping("/allprojects")
-    public List<Project> findAll(){
+    @GetMapping("/projects")
+    public List<Project> findAll() {
         return projectService.findAll();
+    }
+
+    @PostMapping("/projects")
+    public Project create(@RequestBody Project project) {
+        return projectService.save(project);
+    }
+
+    @DeleteMapping("/projects/{id}")
+    public ResponseEntity<?> delete(@PathVariable long id) {
+        projectService.delete(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,6 +1,7 @@
 package com.altynbekova.top.unidirectionalassociation.controller;
 
 import com.altynbekova.top.unidirectionalassociation.entity.Person;
+import com.altynbekova.top.unidirectionalassociation.entity.Project;
 import com.altynbekova.top.unidirectionalassociation.mapping.PersonModelAssembler;
 import com.altynbekova.top.unidirectionalassociation.service.PersonService;
 import org.springframework.hateoas.CollectionModel;
@@ -17,15 +18,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class PersonController {
-    //    private PersonRepository repository;
     private PersonService personService;
 
     private PersonModelAssembler personModelAssembler;
 
-    public PersonController(/*PersonRepository repository,*/
+    public PersonController(
             PersonService service,
             PersonModelAssembler personModelAssembler) {
-//        this.repository = repository;
         this.personService = service;
         this.personModelAssembler = personModelAssembler;
     }
@@ -54,6 +53,21 @@ public class PersonController {
         Person person = personService.findById(id);
 
         return personModelAssembler.toModel(person);
+    }
+
+    @PostMapping("/users/{id}/projects")
+    public Person addProject(@PathVariable long id, @RequestBody Project project) {
+        return personService.addProject(id, project);
+    }
+
+    @DeleteMapping("/users/{userId}/projects/{projectId}")
+    public Person removeProject(@PathVariable long userId, @PathVariable long projectId) {
+        return personService.removeProject(userId, projectId);
+    }
+
+    @DeleteMapping("/users/{userId}/projects")
+    public Person removeProject(@PathVariable long userId, @RequestBody Project project) {
+        return personService.removeProject(userId, project);
     }
 
 }
