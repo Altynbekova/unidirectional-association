@@ -3,6 +3,7 @@ package com.altynbekova.top.unidirectionalassociation.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class Project {
     private String name;
     @ManyToMany(mappedBy = "projects")
     @JsonIgnore
-    private Set<Person> people;
+    private Set<Person> people = new HashSet<>();
 
     public Project() {
     }
@@ -40,9 +41,9 @@ public class Project {
         return people;
     }
 
-    public void setPeople(Set<Person> people) {
+    /*public void setPeople(Set<Person> people) {
         this.people = people;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {

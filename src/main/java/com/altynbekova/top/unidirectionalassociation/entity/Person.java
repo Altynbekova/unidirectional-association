@@ -3,6 +3,7 @@ package com.altynbekova.top.unidirectionalassociation.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
-    private Set<Project> projects;
+    private Set<Project> projects = new HashSet<>();
 
     public Person() {
     }
@@ -56,9 +57,9 @@ public class Person {
         return projects;
     }
 
-    public void setProjects(Set<Project> projects) {
+    /*public void setProjects(Set<Project> projects) {
         this.projects = projects;
-    }
+    }*/
 
     public Company getCompany() {
         return company;

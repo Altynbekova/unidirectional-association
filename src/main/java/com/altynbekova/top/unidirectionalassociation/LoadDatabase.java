@@ -28,7 +28,7 @@ public class LoadDatabase {
             Company company = new Company("Company1", new HashSet<>());
 
             Project project = new Project("Project1");
-            project.setPeople(new HashSet<>());
+//            project.setPeople(new HashSet<>());
             Person person2 = new Person("User3", 22, "C3 Str3 Bld3");
 
             LOG.info("Preloading "+ personService.save(new Person("User2",

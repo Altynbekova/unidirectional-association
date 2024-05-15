@@ -1,6 +1,7 @@
 package com.altynbekova.top.unidirectionalassociation.service;
 
 import com.altynbekova.top.unidirectionalassociation.dao.PersonRepository;
+import com.altynbekova.top.unidirectionalassociation.dao.ProjectRepository;
 import com.altynbekova.top.unidirectionalassociation.entity.Person;
 import com.altynbekova.top.unidirectionalassociation.entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class PersonService {
+    @Autowired
+    private ProjectRepository projectRepository;
     @Autowired
     private PersonRepository personRepository;
 
@@ -32,7 +35,7 @@ public class PersonService {
 
     @Transactional
     public Person save(Project project, Person person) {
-        if (person.getProjects() == null) {
+        /*if (person.getProjects() == null) {
             person.setProjects(new HashSet<>());
         }
         person.addProject(project);

@@ -16,7 +16,7 @@ public class Company {
 
     private String name;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Person> people = new HashSet<>();
 
     public Company() {
@@ -51,9 +51,9 @@ public class Company {
         return people;
     }
 
-    public void setPeople(Set<Person> people) {
+    /*public void setPeople(Set<Person> people) {
         this.people = people;
-    }
+    }*/
 
     public void addPerson(Person person) {
         people.add(person);
